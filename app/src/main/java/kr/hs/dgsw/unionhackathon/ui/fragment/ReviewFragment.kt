@@ -4,29 +4,40 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kr.hs.dgsw.unionhackathon.databinding.FragmentReviewBinding
 import kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity.Review
 import kr.hs.dgsw.unionhackathon.ui.adapter.ReviewRecyclerViewAdapter
+import kr.hs.dgsw.unionhackathon.ui.viewmodel.ReviewViewModel
 
+@AndroidEntryPoint
 class ReviewFragment : Fragment() {
 
     private lateinit var binding: FragmentReviewBinding
     private val adapter = ReviewRecyclerViewAdapter()
+
+    private val viewModel: ReviewViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentReviewBinding.inflate(inflater)
+        binding.data = null
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getReviews()
+
         init()
+        observe()
     }
 
     private fun init() {
@@ -35,12 +46,18 @@ class ReviewFragment : Fragment() {
         binding.toolbarReview.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+    }
 
-        val dummyList = listOf(
-            Review("닉네임", 10, 40, 50, "negative", "졸려요~", listOf("마싯는 마라탕", "하하")),
-            Review("닉네임", 90, 5, 5, "positive","졸려요~", listOf("마싯는 마라탕", "하하"))
-        )
+    private fun observe() = with(viewModel) {
+        isSuccess.observe(viewLifecycleOwner) {
+            binding.data = it
+            adapter.setList(it.reviewResponseList)
 
-        adapter.setList(dummyList)
+            // todo 그 표정 바꾸기 ~
+        }
+
+        isFailure.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "fail", Toast.LENGTH_SHORT).show()
+        }
     }
 }

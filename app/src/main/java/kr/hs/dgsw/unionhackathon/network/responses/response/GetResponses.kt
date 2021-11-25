@@ -7,25 +7,24 @@ import kr.hs.dgsw.unionhackathon.network.responses.responseObj.base.Response
 abstract class GetResponses<SV> {
     abstract val service: SV
 
-    fun <T> getResponse(): Function<retrofit2.Response<Response<T>>, T> {
+    fun <T> getResponse(): Function<retrofit2.Response<T>, T> {
         return Function {
             checkError(it)
-            it.body()?.data
+            it.body()
         }
     }
 
-    fun <T> getMessage(): Function<retrofit2.Response<Response<T>>, String> {
+    fun <T> getMessage(): Function<retrofit2.Response<T>, String> {
         return Function {
             checkError(it)
-            it.body()?.message
+            it.message()
         }
     }
 
-    private fun <T> checkError(response: retrofit2.Response<Response<T>>) {
+    private fun <T> checkError(response: retrofit2.Response<T>) {
         if (!response.isSuccessful) {
             val gson = Gson()
-            val errorBody = gson.fromJson(response.errorBody()?.charStream(), Response::class.java)
-            throw Throwable(errorBody.message)
+            throw Throwable(response.code().toString())
         }
     }
 }

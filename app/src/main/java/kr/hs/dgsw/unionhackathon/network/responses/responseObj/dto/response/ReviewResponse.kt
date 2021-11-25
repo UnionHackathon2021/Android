@@ -1,6 +1,6 @@
 package kr.hs.dgsw.unionhackathon.network.responses.responseObj.dto.response
 
-data class Review(
+data class ReviewResponse(
     val content: String,
     val id: Int,
     val negative: Int,
