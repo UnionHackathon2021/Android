@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kr.hs.dgsw.unionhackathon.network.`object`.RetrofitInstance
+import kr.hs.dgsw.unionhackathon.network.service.ClovaService
 import kr.hs.dgsw.unionhackathon.network.service.ReviewService
 import javax.inject.Singleton
 
@@ -16,4 +17,9 @@ class ServiceModule {
     @Provides
     fun provideReviewService(): ReviewService =
         RetrofitInstance.reviewService
+
+    @Singleton
+    @Provides
+    fun provideClovaService(): ClovaService =
+        RetrofitInstance.clovaService
 }
