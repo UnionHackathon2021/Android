@@ -3,6 +3,8 @@ package kr.hs.dgsw.unionhackathon.ui.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -51,13 +53,21 @@ class ReviewFragment : Fragment() {
     private fun observe() = with(viewModel) {
         isSuccess.observe(viewLifecycleOwner) {
             binding.data = it
-            adapter.setList(it.reviewResponseList)
+
+            if (it.reviewResponseList.isEmpty()) {
+                binding.layoutEmptyReview.visibility = VISIBLE
+                binding.rvReview.visibility = GONE
+            } else {
+                binding.layoutEmptyReview.visibility = GONE
+                binding.rvReview.visibility = VISIBLE
+
+                adapter.setList(it.reviewResponseList)
+            }
 
             // todo 그 표정 바꾸기 ~
         }
 
         isFailure.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "fail", Toast.LENGTH_SHORT).show()
         }
     }
 }
