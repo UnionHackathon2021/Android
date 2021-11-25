@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/createReviewFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -19,4 +19,8 @@
         android:name="kr.hs.dgsw.unionhackathon.ui.fragment.StoreInfoFragment"
         android:label="StoreInfoFragment"
         tools:layout="@layout/fragment_store_info"/>
+    <fragment
+        android:id="@+id/createReviewFragment"
+        android:name="kr.hs.dgsw.unionhackathon.ui.fragment.CreateReviewFragment"
+        android:label="CreateReviewFragment" />
 </navigation>
