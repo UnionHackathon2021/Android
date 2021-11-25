@@ -46,12 +46,15 @@ class CreateReviewFragment : Fragment() {
         }
 
         binding.btnConfirmCreateReview.setOnClickListener {
-            viewModel.postVoice()
-//            if (viewModel.content.value.isNullOrBlank()) {
-//                Toast.makeText(requireContext(), "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show()
-//            } else {
-//                viewModel.postVoice()
-//            }
+//            viewModel.postVoice()
+
+            val content = binding.etContentReview.text
+
+            if (content.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.postCreateReview(content.toString())
+            }
         }
     }
 
@@ -62,6 +65,10 @@ class CreateReviewFragment : Fragment() {
 
         isFailure.observe(viewLifecycleOwner) {
 
+        }
+
+        isSuccessCreate.observe(viewLifecycleOwner) {
+            navController.navigateUp()
         }
     }
 

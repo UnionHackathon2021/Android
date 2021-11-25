@@ -1,5 +1,6 @@
 package kr.hs.dgsw.unionhackathon.network.repository
 
+import android.util.Log
 import io.reactivex.Single
 import kr.hs.dgsw.unionhackathon.network.responses.response.GetResponses
 import kr.hs.dgsw.unionhackathon.network.responses.responseObj.dto.request.ReviewRequest
@@ -12,7 +13,7 @@ class ReviewRepository(override val service: ReviewService) : GetResponses<Revie
         return service.getReviews().map(getResponse())
     }
 
-    fun postCreateReview(reviewRequest: ReviewRequest): Single<String> {
-        return service.postCreateReview(reviewRequest).map(getMessage())
+    fun postCreateReview(reviewRequest: ReviewRequest): Single<Unit> {
+        return service.postCreateReview(reviewRequest).map(getResponse())
     }
 }

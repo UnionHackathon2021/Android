@@ -17,14 +17,13 @@ abstract class GetResponses<SV> {
     fun <T> getMessage(): Function<retrofit2.Response<T>, String> {
         return Function {
             checkError(it)
-            it.message()
+            it.code().toString()
         }
     }
 
     private fun <T> checkError(response: retrofit2.Response<T>) {
         if (!response.isSuccessful) {
             val gson = Gson()
-            Log.e("errorBody", response.errorBody()!!.string()) // todo remove
             throw Throwable(response.code().toString())
         }
     }

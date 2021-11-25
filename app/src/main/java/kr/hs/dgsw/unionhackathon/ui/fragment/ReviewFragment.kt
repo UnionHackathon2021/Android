@@ -1,16 +1,20 @@
 package kr.hs.dgsw.unionhackathon.ui.fragment
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kr.hs.dgsw.unionhackathon.R
 import kr.hs.dgsw.unionhackathon.databinding.FragmentReviewBinding
+import kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity.ReviewList
 import kr.hs.dgsw.unionhackathon.ui.adapter.ReviewRecyclerViewAdapter
 import kr.hs.dgsw.unionhackathon.ui.viewmodel.ReviewViewModel
 
@@ -62,14 +66,39 @@ class ReviewFragment : Fragment() {
                 adapter.setList(it.reviewList)
             }
 
-            // todo 그 표정 바꾸기 ~
+            val colorGrey = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.dark_grey))
+            when (getSentiment(it)) {
+                "positive" -> {
+                    binding.ivPositiveReview.backgroundTintList = null
+                    binding.ivNegativeReview.backgroundTintList = colorGrey
+                    binding.ivNeutralReview.backgroundTintList = colorGrey
+                }
+
+                "neutral" -> {
+                    binding.ivPositiveReview.backgroundTintList = colorGrey
+                    binding.ivNegativeReview.backgroundTintList = colorGrey
+                    binding.ivNeutralReview.backgroundTintList = null
+                }
+
+                "negative" -> {
+                    binding.ivPositiveReview.backgroundTintList = colorGrey
+                    binding.ivNegativeReview.backgroundTintList = null
+                    binding.ivNeutralReview.backgroundTintList = colorGrey
+                }
+            }
         }
 
         isFailure.observe(viewLifecycleOwner) {
         }
     }
 
-    private fun getSetiment(): String {
-        return ""
+    private fun getSentiment(reviewList: ReviewList): String {
+        return if (reviewList.totalPositive > reviewList.totalNegative && reviewList.totalPositive > reviewList.totalNeutral) {
+            "positive"
+        } else if (reviewList.totalNegative > reviewList.totalPositive && reviewList.totalNegative > reviewList.totalNeutral) {
+            "negative"
+        } else {
+            "neutral"
+        }
     }
 }
