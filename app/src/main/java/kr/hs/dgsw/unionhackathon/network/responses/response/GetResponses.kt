@@ -23,6 +23,7 @@ abstract class GetResponses<SV> {
 
     private fun <T> checkError(response: retrofit2.Response<T>) {
         if (!response.isSuccessful) {
+            Log.e("errorBody", "${response.message()}, ${response.errorBody()!!.string()}")
             val gson = Gson()
             throw Throwable(response.code().toString())
         }

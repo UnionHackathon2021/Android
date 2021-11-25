@@ -9,8 +9,7 @@ import okhttp3.ResponseBody
 
 class ClovaRepository(override val service: ClovaService) : GetResponses<ClovaService>() {
 
-    fun postVoice(voiceRequest: VoiceRequest): Single<ResponseBody> {
-        Log.e("ClovaRepostory", voiceRequest.toString())
-        return service.postVoice(voiceRequest).map(getResponse())
+    fun postVoice(speaker: String, text: String): Single<ResponseBody> {
+        return service.postVoice(speaker, text).map(getResponse())
     }
 }

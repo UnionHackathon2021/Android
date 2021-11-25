@@ -147,13 +147,15 @@
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_confirm_create_review"
+                    android:background="@drawable/selector_review_create"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
                     android:stateListAnimator="@null"
+                    android:textColor="@color/white"
                     android:text="리뷰 등록하기"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -165,11 +167,11 @@
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:text="리뷰 작성시 꼭 지켜주세요!"
+                    android:layout_marginTop="36dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/button2" />
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -181,19 +183,53 @@
                     app:layout_constraintStart_toStartOf="@id/textView16"
                     app:layout_constraintTop_toBottomOf="@id/textView16" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button2"
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_marginTop="16dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/selector_review_record"
-                    android:elevation="0dp"
-                    android:stateListAnimator="@null"
-                    android:text="음성으로 입력하기"
-                    android:textColor="@color/main"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
                     app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_sound_create_review"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_review_create"
+                        android:drawableEnd="@drawable/ic_baseline_play_arrow_24"
+                        android:paddingEnd="16dp"
+                        android:text="음성으로 듣기"
+                        android:textColor="@color/white" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_sound_stop_create_review"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_review_create"
+                        android:drawableEnd="@drawable/ic_baseline_pause_24"
+                        android:paddingEnd="16dp"
+                        android:text="음성 멈추기"
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_record_create_review"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_review_record"
+                        android:stateListAnimator="@null"
+                        android:text="음성으로 입력하기"
+                        android:textColor="@color/main" />
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
