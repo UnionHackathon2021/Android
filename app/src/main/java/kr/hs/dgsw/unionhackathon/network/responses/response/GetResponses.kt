@@ -2,7 +2,6 @@ package kr.hs.dgsw.unionhackathon.network.responses.response
 
 import com.google.gson.Gson
 import io.reactivex.functions.Function
-import kr.hs.dgsw.unionhackathon.network.responses.responseObj.base.Response
 
 abstract class GetResponses<SV> {
     abstract val service: SV
