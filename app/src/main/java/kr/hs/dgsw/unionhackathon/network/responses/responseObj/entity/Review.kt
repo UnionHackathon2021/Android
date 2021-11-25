@@ -1,12 +1,12 @@
 package kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity
 
 data class Review(
-    val content: String,
     val id: Int,
-    val negative: Int,
-    val neutral: Int,
-    val positive: Int,
+    val content: String,
     val sentiment: String,
+    val negative: Float,
+    val neutral: Float,
+    val positive: Float,
 
     val nickname: String?,
     val menu: List<String>?

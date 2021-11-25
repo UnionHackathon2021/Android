@@ -34,6 +34,7 @@ class ReviewViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
+                    Log.d("getReview", it.toString())
                     _isSuccess.postValue(it.toEntity())
                 }, {
                     Log.e("getReviews", it.message.toString())

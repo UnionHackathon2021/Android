@@ -1,8 +1,8 @@
 package kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity
 
 data class ReviewList(
-    val reviewResponseList: List<Review>?,
-    val totalNegative: Int,
-    val totalNeutral: Int,
-    val totalPositive: Int
+    val totalNegative: Float,
+    val totalNeutral: Float,
+    val totalPositive: Float,
+    val reviewList: List<Review>?
 )
