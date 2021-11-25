@@ -2,4 +2,5 @@
     <string name="app_name">UnionHackathon</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="format_emotion">긍정 %d%% 중립 %d%% 부정 %d%%</string>
 </resources>

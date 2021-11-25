@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:background="@drawable/background_review_menu"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name_rv_item_menu"
+            style="@style/RegularTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/main"
+            tools:text="너무 마싯어서 졸도하는 마라탕"/>
+
+    </LinearLayout>
+
+</LinearLayout>
