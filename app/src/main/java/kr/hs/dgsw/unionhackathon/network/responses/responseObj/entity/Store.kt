@@ -10,5 +10,6 @@ data class Store(
     val minDeliveryTime: Int,
     val maxDeliveryTime: Int,
     val categoryList: List<Category>,
-    val famousMenuList: List<Menu>
+    val famousMenuList: List<Menu>,
+    val image: String,
 )

@@ -78,7 +78,8 @@ class StoreInfoViewModel: ViewModel() {
             23,
             30,
             categoryList,
-            famousMenuList
+            famousMenuList,
+            "http://kormedi.com/wp-content/uploads/2021/05/0002313329_001_202105200942055171-580x387.jpg"
         )
     }
 }

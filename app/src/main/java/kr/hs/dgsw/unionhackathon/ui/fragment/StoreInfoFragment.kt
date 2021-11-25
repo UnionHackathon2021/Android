@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import coil.load
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kr.hs.dgsw.unionhackathon.databinding.FragmentStoreInfoBinding
 import kr.hs.dgsw.unionhackathon.ui.adapter.StoreAdapter
@@ -41,6 +43,7 @@ class StoreInfoFragment : Fragment() {
     private fun observe() {
         viewModel.store.observe(viewLifecycleOwner) {
             adapter.submitList(it.categoryList)
+            binding.ivMainImageStoreInfo.load(it.image)
         }
     }
 
@@ -57,5 +60,9 @@ class StoreInfoFragment : Fragment() {
                     ObjectAnimator.ofFloat(binding.tvStoreNameStoreInfo, "alpha", 1f, 0f).start()
             }
         })
+
+        binding.toolbarStoreInfo.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }
