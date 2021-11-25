@@ -46,22 +46,23 @@ class CreateReviewFragment : Fragment() {
         }
 
         binding.btnConfirmCreateReview.setOnClickListener {
-            viewModel.postVoice()
-//            if (viewModel.content.value.isNullOrBlank()) {
-//                Toast.makeText(requireContext(), "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show()
-//            } else {
-//                viewModel.postVoice()
-//            }
+            if (viewModel.content.value.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.postVoice()
+            }
         }
     }
 
     private fun observe() = with(viewModel) {
         isSuccess.observe(viewLifecycleOwner) {
+            Log.d("TAG", "observe: ${it.string()}")
             saveFile(it, "C:\\Github\\UnionHackathon2021\\mp3")
+            findNavController().navigate(R.id.action_createReviewFragment_to_homeFragment)
         }
 
         isFailure.observe(viewLifecycleOwner) {
-
+            Log.d("TAG", "observe: ${it}")
         }
     }
 

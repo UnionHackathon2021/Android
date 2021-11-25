@@ -203,8 +203,7 @@
                 android:minHeight="40dp"
                 android:paddingHorizontal="60dp"
                 android:stateListAnimator="@null"
-                android:text="@{@string/reviewSize(vm.store.reviewSize)}"
-                tools:text="리뷰 1"
+                android:text="리뷰"
                 android:background="@drawable/box_default" />
 
         </LinearLayout>

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import coil.load
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
+import kr.hs.dgsw.unionhackathon.R
 import kr.hs.dgsw.unionhackathon.databinding.FragmentStoreInfoBinding
 import kr.hs.dgsw.unionhackathon.ui.adapter.StoreAdapter
 import kr.hs.dgsw.unionhackathon.ui.viewmodel.StoreInfoViewModel
@@ -33,6 +34,7 @@ class StoreInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModelStore.clear()
         binding = FragmentStoreInfoBinding.inflate(inflater)
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -79,6 +81,10 @@ class StoreInfoFragment : Fragment() {
 
         binding.toolbarStoreInfo.setNavigationOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.btnSubmitStoreInfo.setOnClickListener {
+            findNavController().navigate(R.id.action_storeInfoFragment_to_orderFragment)
         }
     }
 }
