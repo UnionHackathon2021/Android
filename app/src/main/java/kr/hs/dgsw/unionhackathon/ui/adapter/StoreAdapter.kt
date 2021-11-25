@@ -12,7 +12,13 @@ import kr.hs.dgsw.unionhackathon.databinding.ItemMenuListBinding
 import kr.hs.dgsw.unionhackathon.databinding.ItemStoreFamousMenuListBinding
 import kr.hs.dgsw.unionhackathon.databinding.ItemStoreHeaderBinding
 import kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity.Category
+import kr.hs.dgsw.unionhackathon.ui.decoration.ItemDecoration
 import kr.hs.dgsw.unionhackathon.ui.viewmodel.StoreInfoViewModel
+import android.util.TypedValue
+import androidx.recyclerview.widget.LinearLayoutManager
+
+import kotlin.math.roundToInt
+
 
 class StoreAdapter(
     private val viewModel: StoreInfoViewModel
@@ -49,6 +55,14 @@ class StoreAdapter(
         private val binding: ItemStoreFamousMenuListBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind() {
+            if (binding.rvFamousMenuList.itemDecorationCount == 0) {
+                val resources = binding.root.resources
+                val margin = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 16f, resources.displayMetrics
+                ).roundToInt()
+                binding.rvFamousMenuList.addItemDecoration(ItemDecoration(margin, orientation = LinearLayoutManager.HORIZONTAL))
+            }
+
             val adapter = FamousMenuListAdapter()
             viewModel.store.value?.let {
                 binding.rvFamousMenuList.adapter = adapter
@@ -62,7 +76,6 @@ class StoreAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
             binding.category = category
-
             val adapter = MenuListAdapter()
             binding.rvMenuList.adapter = adapter
             adapter.submitList(category.menuList)

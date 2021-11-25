@@ -8,4 +8,6 @@
     <string name="reviewSize">리뷰 %d</string>
     <string name="detailMoney">최소주문 %,d원, 배달요금 %,d원</string>
     <string name="transition_name">transitionImage</string>
+    <string name="payment">%,d원 결제하기</string>
+    <string name="option_title">%s (%,d원 추가)</string>
 </resources>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
@@ -19,9 +20,14 @@ import kotlin.math.abs
 
 class StoreInfoFragment : Fragment() {
 
-    private val viewModel: StoreInfoViewModel by viewModels()
+    private val viewModel: StoreInfoViewModel by activityViewModels()
     private lateinit var binding: FragmentStoreInfoBinding
     private lateinit var adapter: StoreAdapter
+
+    override fun onResume() {
+        super.onResume()
+        binding.rvStoreInfo.scrollToPosition(0)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +35,7 @@ class StoreInfoFragment : Fragment() {
     ): View {
         binding = FragmentStoreInfoBinding.inflate(inflater)
         binding.vm = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -46,6 +53,14 @@ class StoreInfoFragment : Fragment() {
             adapter.submitList(it.categoryList)
             binding.ivMainImageStoreInfo.load(it.image)
         }
+
+        viewModel.size.observe(viewLifecycleOwner) {
+            if ((viewModel.size.value ?: 0) >= 1) {
+                binding.btnSubmitStoreInfo.visibility = View.VISIBLE
+            } else {
+                binding.btnSubmitStoreInfo.visibility = View.GONE
+            }
+        }
     }
 
     private fun init() {
@@ -54,10 +69,10 @@ class StoreInfoFragment : Fragment() {
 
         binding.appBarLayoutToolbarStoreInfo.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
             if (abs(verticalOffset) - appBarLayout.totalScrollRange >= 0) {
-                if (binding.tvStoreNameStoreInfo.alpha != 1f)
+                if (binding.tvStoreNameStoreInfo.alpha == 0f)
                     ObjectAnimator.ofFloat(binding.tvStoreNameStoreInfo, "alpha", 0f, 1f).start()
             } else {
-                if (binding.tvStoreNameStoreInfo.alpha != 0f)
+                if (binding.tvStoreNameStoreInfo.alpha == 1f)
                     ObjectAnimator.ofFloat(binding.tvStoreNameStoreInfo, "alpha", 1f, 0f).start()
             }
         })

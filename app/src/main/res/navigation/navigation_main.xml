@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_storeInfoFragment_to_createReviewFragment"
             app:destination="@id/createReviewFragment" />
+        <action
+            android:id="@+id/action_storeInfoFragment_to_menuDetailFragment"
+            app:destination="@id/menuDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewFragment"
@@ -35,9 +38,10 @@
         android:id="@+id/createReviewFragment"
         android:name="kr.hs.dgsw.unionhackathon.ui.fragment.CreateReviewFragment"
         tools:layout="@layout/fragment_create_review"
-        android:label="CreateReviewFragment" >
-        <action
-            android:id="@+id/action_createReviewFragment_to_storeInfoFragment"
-            app:destination="@id/storeInfoFragment" />
-    </fragment>
+        android:label="CreateReviewFragment" />
+    <fragment
+        android:id="@+id/menuDetailFragment"
+        android:name="kr.hs.dgsw.unionhackathon.ui.fragment.MenuDetailFragment"
+        android:label="fragment_menu_detail"
+        tools:layout="@layout/fragment_menu_detail" />
 </navigation>

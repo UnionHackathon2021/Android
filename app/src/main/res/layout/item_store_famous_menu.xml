@@ -9,53 +9,50 @@
             type="kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity.Menu" />
     </data>
 
-    <FrameLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_open_add_menu_page_famous_menu"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:cardCornerRadius="20dp"
+        android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="?selectableItemBackground">
 
-            <LinearLayout
-                android:layout_width="150dp"
+            <ImageView
+                android:id="@+id/iv_famous_menu"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:scaleType="centerCrop"
+                android:elevation="0dp"
+                android:background="@color/grey" />
+
+            <TextView
+                android:id="@+id/tv_menu_name_famous_menu"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:text="@{menu.title}"
+                tools:text="메뉴1"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:scaleType="centerCrop"
-                    android:background="@color/grey" />
+            <TextView
+                android:id="@+id/tv_menu_price_famous_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/money(menu.price)}"
+                tools:text="1,000,000원"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_menu_name_famous_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{menu.title}"
-                    tools:text="메뉴1"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_menu_price_famous_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{@string/money(menu.price)}"
-                    tools:text="1,000,000원"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="10dp" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </FrameLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

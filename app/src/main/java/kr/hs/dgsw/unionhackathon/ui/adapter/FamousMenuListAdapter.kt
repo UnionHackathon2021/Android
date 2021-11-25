@@ -2,7 +2,11 @@ package kr.hs.dgsw.unionhackathon.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import kr.hs.dgsw.unionhackathon.R
 import kr.hs.dgsw.unionhackathon.databinding.ItemStoreFamousMenuBinding
 import kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity.Menu
 
@@ -20,6 +24,11 @@ class FamousMenuListAdapter: RecyclerView.Adapter<FamousMenuListAdapter.ViewHold
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(menu: Menu) {
             binding.menu = menu
+            binding.btnOpenAddMenuPageFamousMenu.setOnClickListener {
+                val bundle = bundleOf("menu" to menu)
+                it.findNavController().navigate(R.id.action_storeInfoFragment_to_menuDetailFragment, bundle)
+            }
+            binding.ivFamousMenu.load(menu.image)
         }
     }
 

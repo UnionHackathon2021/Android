@@ -42,7 +42,7 @@ class CreateReviewFragment : Fragment() {
         observe()
 
         binding.btnBackCreateReview.setOnClickListener {
-            navController.navigate(R.id.action_createReviewFragment_to_storeInfoFragment)
+
         }
 
         binding.btnConfirmCreateReview.setOnClickListener {
