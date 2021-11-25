@@ -29,16 +29,18 @@ class CreateReviewViewModel @Inject constructor(
     val content = MutableLiveData<String>()
 
     fun postVoice() {
-        val voiceRequest = VoiceRequest("nhajun", content.value!!)
+        val voiceRequest = VoiceRequest("nhajun", "안녕하세요")
 
         compositeDisposable.add(
             clovaRepository.postVoice(voiceRequest)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
+                    Log.e("postVoice", it.string())
+                    Log.e("postVoice", it.toString())
                     _isSuccess.postValue(it)
                 }, {
-                    Log.e("postVoice", it.message.toString())
+                    Log.e("postVoice", "error: ${it.message.toString()}")
                     _isFailure.postValue(it.message)
                 })
         )

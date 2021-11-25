@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kr.hs.dgsw.unionhackathon.R
 import kr.hs.dgsw.unionhackathon.databinding.FragmentCreateReviewBinding
 import kr.hs.dgsw.unionhackathon.ui.viewmodel.CreateReviewViewModel
@@ -16,6 +18,7 @@ import okhttp3.ResponseBody
 import java.io.FileOutputStream
 import java.io.InputStream
 
+@AndroidEntryPoint
 class CreateReviewFragment : Fragment() {
 
     private val navController: NavController by lazy {
@@ -44,7 +47,11 @@ class CreateReviewFragment : Fragment() {
 
         binding.btnConfirmCreateReview.setOnClickListener {
             viewModel.postVoice()
-            // todo 서버 연동
+//            if (viewModel.content.value.isNullOrBlank()) {
+//                Toast.makeText(requireContext(), "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show()
+//            } else {
+//                viewModel.postVoice()
+//            }
         }
     }
 

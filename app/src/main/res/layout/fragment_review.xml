@@ -16,21 +16,21 @@
 
         <LinearLayout
             android:id="@+id/layout_empty_review"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone">
 
             <TextView
-                android:textColor="@color/black"
-                android:text="리뷰가 없어요."
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="리뷰가 없어요."
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             tools:context=".ui.fragment.ReviewFragment">
 
             <FrameLayout
@@ -112,7 +112,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{@string/percent(data.totalPositive)}"
                 android:textColor="@color/positive"
                 app:layout_constraintEnd_toEndOf="@+id/imageView2"
                 app:layout_constraintStart_toStartOf="@+id/imageView2"
@@ -145,7 +144,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{@string/percent(data.totalNeutral)}"
                 android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="@+id/imageView3"
                 app:layout_constraintStart_toStartOf="@+id/imageView3"
@@ -157,7 +155,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginTop="8dp"
-                android:text="@{@string/percent(data.totalNegative)}"
                 android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="@+id/imageView4"
                 app:layout_constraintStart_toStartOf="@+id/imageView4"
@@ -176,7 +173,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8"
                 tools:listitem="@layout/item_review" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

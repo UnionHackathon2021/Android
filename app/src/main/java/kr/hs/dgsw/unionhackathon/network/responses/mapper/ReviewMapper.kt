@@ -7,30 +7,30 @@ import kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity.ReviewList
 
 fun ReviewResponse.toEntity(): Review =
     Review(
-        this.content,
         this.id,
+        this.content,
+        this.sentiment,
+        this.positive,
         this.negative,
         this.neutral,
-        this.positive,
-        this.sentiment,
-        null,
-        null
+        "닉네임",
+        listOf("맛있는 메뉴")
     )
 
 fun ReviewListResponse.toEntity(): ReviewList {
-    return if (reviewResponseList == null) {
+    return if (reviewList == null) {
         ReviewList(
-            listOf(),
             this.totalNegative,
             this.totalNeutral,
-            this.totalPositive
+            this.totalPositive,
+            listOf()
         )
     } else {
         ReviewList(
-            this.reviewResponseList.map { it.toEntity() },
             this.totalNegative,
             this.totalNeutral,
-            this.totalPositive
+            this.totalPositive,
+            this.reviewList.map { it.toEntity() }
         )
     }
 
