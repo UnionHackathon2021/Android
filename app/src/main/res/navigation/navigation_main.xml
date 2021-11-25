@@ -22,10 +22,22 @@
         <action
             android:id="@+id/action_storeInfoFragment_to_reviewFragment"
             app:destination="@id/reviewFragment" />
+        <action
+            android:id="@+id/action_storeInfoFragment_to_createReviewFragment"
+            app:destination="@id/createReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewFragment"
         android:name="kr.hs.dgsw.unionhackathon.ui.fragment.ReviewFragment"
         android:label="ReviewFragment"
         tools:layout="@layout/fragment_review"/>
+    <fragment
+        android:id="@+id/createReviewFragment"
+        android:name="kr.hs.dgsw.unionhackathon.ui.fragment.CreateReviewFragment"
+        tools:layout="@layout/fragment_create_review"
+        android:label="CreateReviewFragment" >
+        <action
+            android:id="@+id/action_createReviewFragment_to_storeInfoFragment"
+            app:destination="@id/storeInfoFragment" />
+    </fragment>
 </navigation>
