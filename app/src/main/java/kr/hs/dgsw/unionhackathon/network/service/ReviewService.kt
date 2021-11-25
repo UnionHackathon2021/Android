@@ -13,5 +13,5 @@ interface ReviewService {
     fun getReviews(): Single<Response<ReviewListResponse>>
 
     @POST("/review")
-    fun postCreateReview(@Body reviewRequest: ReviewRequest): Single<Response<String>>
+    fun postCreateReview(@Body reviewRequest: ReviewRequest): Single<Response<Unit>>
 }
