@@ -4,4 +4,5 @@
     <string name="money">%,d원</string>
     <string name="deliveryTime">%02d-%02d분</string>
     <string name="reviewSize">리뷰 %d</string>
+    <string name="detailMoney">최소주문 %,d원, 배달요금 %,d원</string>
 </resources>

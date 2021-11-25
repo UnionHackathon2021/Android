@@ -10,4 +10,6 @@
     <color name="grey">#FFDEDEDE</color>
     <color name="main">#FFFF7777</color>
     <color name="positive">#FF00A3FF</color>
+    <color name="neutral">#FFFFB800</color>
+    <color name="negative">#FFFF7777</color>
 </resources>

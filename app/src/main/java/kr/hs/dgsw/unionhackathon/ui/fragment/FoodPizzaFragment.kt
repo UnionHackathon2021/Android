@@ -5,11 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.unionhackathon.R
 import kr.hs.dgsw.unionhackathon.databinding.FragmentHomeFoodBinding
 import kr.hs.dgsw.unionhackathon.ui.adapter.HomeRecyclerViewAdapter
+import kr.hs.dgsw.unionhackathon.ui.viewmodel.FoodPizzaViewModel
 
 class FoodPizzaFragment : Fragment() {
+
+    private val viewModel: FoodPizzaViewModel by viewModels()
 
     /// 가까운 거리 리사이클러뷰
     private val nearAdapter = HomeRecyclerViewAdapter()
@@ -29,7 +35,21 @@ class FoodPizzaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (viewModel.storeList.value == null) {
+            viewModel.getStoreList()
+        }
+
         initRecyclerView()
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.nearStoreList.observe(viewLifecycleOwner){
+            nearAdapter.setList(it)
+        }
+        viewModel.storeList.observe(viewLifecycleOwner) {
+            adapter.setList(it)
+        }
     }
 
     private fun initRecyclerView() {
@@ -46,6 +66,7 @@ class FoodPizzaFragment : Fragment() {
     }
 
     private fun navigateToStoreInfo(id: Int) {
-        // todo 대충 storeInfo 로 navigate 하는 코드
+        val bundle = bundleOf("id" to id)
+        findNavController().navigate(R.id.action_homeFragment_to_storeInfoFragment, bundle)
     }
 }

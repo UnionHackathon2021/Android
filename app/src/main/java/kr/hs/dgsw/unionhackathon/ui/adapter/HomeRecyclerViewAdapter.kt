@@ -1,10 +1,15 @@
 package kr.hs.dgsw.unionhackathon.ui.adapter
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import kr.hs.dgsw.unionhackathon.R
 import kr.hs.dgsw.unionhackathon.databinding.RvItemHomeBinding
+import kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity.StoreSummery
 
 class HomeRecyclerViewAdapter: RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>() {
 
@@ -22,30 +27,66 @@ class HomeRecyclerViewAdapter: RecyclerView.Adapter<HomeRecyclerViewAdapter.View
         }
     }
 
-    private val list: MutableList<String> = mutableListOf()
-    private lateinit var binding: RvItemHomeBinding
+    private val list: MutableList<StoreSummery> = mutableListOf()
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ViewHolder(
+        private val binding: RvItemHomeBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(storeSummery: StoreSummery, position: Int) {
+            binding.storeSummery = storeSummery
+            binding.layoutRvItemHome.setOnClickListener {
+                setOnClickHomeItemListener.onClick(position)
+            }
+            binding.imageView.load(storeSummery.image)
+            when(storeSummery.percent) {
+                in 0..33 -> {
+                    binding.ivFeelingItemHome.setImageResource(R.drawable.ic_negative)
+                    binding.ivPercentItemHome.setTextColor(
+                        ResourcesCompat.getColor(
+                            binding.root.resources,
+                            R.color.negative,
+                            binding.root.resources.newTheme()
+                        )
+                    )
+                }
+
+                in 33..66 -> {
+                    binding.ivFeelingItemHome.setImageResource(R.drawable.ic_neutral)
+                    binding.ivPercentItemHome.setTextColor(
+                        ResourcesCompat.getColor(
+                            binding.root.resources,
+                            R.color.neutral,
+                            binding.root.resources.newTheme()
+                        )
+                    )
+                }
+
+                in 66..100 -> {
+                    binding.ivFeelingItemHome.setImageResource(R.drawable.ic_positive)
+                    binding.ivPercentItemHome.setTextColor(
+                        ResourcesCompat.getColor(
+                            binding.root.resources,
+                            R.color.positive,
+                            binding.root.resources.newTheme()
+                        )
+                    )
+                }
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = RvItemHomeBinding.inflate(LayoutInflater.from(parent.context))
-        return ViewHolder(binding.root)
+        return ViewHolder(RvItemHomeBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data = list[position]
-
-        val id = 0
-        // todo 값 저장 및 onClick 이벤트
-        binding.layoutRvItemHome.setOnClickListener {
-            setOnClickHomeItemListener.onClick(id)
-        }
+        holder.bind(list[position], position)
     }
 
     override fun getItemCount(): Int =
         list.size
 
-    fun setList(list: List<String>) {
+    fun setList(list: List<StoreSummery>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
