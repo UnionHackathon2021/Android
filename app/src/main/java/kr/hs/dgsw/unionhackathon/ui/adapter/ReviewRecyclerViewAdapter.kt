@@ -21,28 +21,27 @@ class ReviewRecyclerViewAdapter : RecyclerView.Adapter<ReviewRecyclerViewAdapter
 
             setWeight(review)
 
-            Log.e("ViewHolder", review.most)
-            val resourceId = when (review.most) {
+            val resourceId = when (review.sentiment) {
                 "positive" -> R.drawable.ic_positive_filled
                 "neutrality" -> R.drawable.ic_neutrality_filled
                 "negative" -> R.drawable.ic_negative_filled
                 else -> R.drawable.ic_positive_filled
             }
 
-            Log.e("ViewHolder", resourceId.toString())
             binding.ivMostItemReview.background =
                 ContextCompat.getDrawable(binding.root.context, resourceId)
 
             val menuAdapter = ReviewMenuRecyclerViewAdapter()
             binding.rvMenuRvItemReview.adapter = menuAdapter
-            menuAdapter.setList(review.menu)
+            if (review.menu != null)
+                menuAdapter.setList(review.menu)
         }
 
         private fun setWeight(review: Review) {
             binding.layout.weightSum = 100f
 
             val paramsPositive = LinearLayout.LayoutParams(0, MATCH_PARENT, review.positive.toFloat())
-            val paramsNeutrality = LinearLayout.LayoutParams(0, MATCH_PARENT, review.neutrality.toFloat())
+            val paramsNeutrality = LinearLayout.LayoutParams(0, MATCH_PARENT, review.neutral.toFloat())
             val paramsNegative = LinearLayout.LayoutParams(0, MATCH_PARENT, review.negative.toFloat())
 
             binding.positiveItemReview.layoutParams = paramsPositive

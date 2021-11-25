@@ -75,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="@{@string/format_emotion(data.positive, data.neutrality, data.negative)}" />
+                    android:text="@{@string/format_emotion(data.positive, data.neutral  , data.negative)}" />
 
                 <TextView
                     android:id="@+id/textView3"
