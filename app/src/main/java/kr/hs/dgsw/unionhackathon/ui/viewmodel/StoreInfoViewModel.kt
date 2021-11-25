@@ -71,7 +71,7 @@ class StoreInfoViewModel: ViewModel() {
         store.value = Store(
             "달콤",
             15,
-            1,
+            2,
             "현장결제 (카드/현금)",
             2000,
             10000,

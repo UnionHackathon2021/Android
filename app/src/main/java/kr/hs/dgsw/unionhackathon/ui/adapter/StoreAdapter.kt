@@ -4,7 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import kr.hs.dgsw.unionhackathon.R
 import kr.hs.dgsw.unionhackathon.databinding.ItemMenuListBinding
 import kr.hs.dgsw.unionhackathon.databinding.ItemStoreFamousMenuListBinding
 import kr.hs.dgsw.unionhackathon.databinding.ItemStoreHeaderBinding
@@ -35,6 +38,10 @@ class StoreAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.vm = viewModel
+            binding.btnReviewDetailStore.setOnClickListener {
+                val bundle = bundleOf("storeName" to viewModel.store.value?.name)
+                binding.root.findNavController().navigate(R.id.action_storeInfoFragment_to_reviewFragment, bundle)
+            }
         }
     }
 
