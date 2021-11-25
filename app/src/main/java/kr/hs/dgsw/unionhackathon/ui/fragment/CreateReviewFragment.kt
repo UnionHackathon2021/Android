@@ -66,29 +66,29 @@ class CreateReviewFragment : Fragment() {
         }
 
         binding.btnSoundCreateReview.setOnClickListener {
-            val text = binding.etContentReview.text // todo 바꾸기
-            viewModel.postVoice("동해물과 백두산이 마르고 닳도록~")
+            val text = binding.etContentReview.text
+
+            if (!text.isNullOrBlank())
+                viewModel.postVoice(text.toString())
         }
 
         binding.btnSoundStopCreateReview.setOnClickListener {
-            mediaPlayer.stop()
-
             setSoundPlayButtonVisible()
-        }
 
+            mediaPlayer.stop()
+        }
 
     }
 
     private fun observe() = with(viewModel) {
         isSuccess.observe(viewLifecycleOwner) {
-            val path = saveFile(it, "\\test.mp3")
+            setSoundStopButtonVisible()
 
+            val path = saveFile(it, "\\test.mp3")
             initMediaPlayer(path)
 
-            if (!mediaPlayer.isPlaying)
+            if (!mediaPlayer.isLooping && !mediaPlayer.isPlaying)
                 mediaPlayer.start()
-
-            setSoundStopButtonVisible()
         }
 
         isFailure.observe(viewLifecycleOwner) {
