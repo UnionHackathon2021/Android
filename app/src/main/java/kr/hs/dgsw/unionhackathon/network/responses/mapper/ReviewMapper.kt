@@ -17,10 +17,21 @@ fun ReviewResponse.toEntity(): Review =
         null
     )
 
-fun ReviewListResponse.toEntity(): ReviewList =
-    ReviewList(
-        this.reviewResponseList.map { it.toEntity() },
-        this.totalNegative,
-        this.totalNeutral,
-        this.totalPositive
-    )
+fun ReviewListResponse.toEntity(): ReviewList {
+    return if (reviewResponseList == null) {
+        ReviewList(
+            listOf(),
+            this.totalNegative,
+            this.totalNeutral,
+            this.totalPositive
+        )
+    } else {
+        ReviewList(
+            this.reviewResponseList.map { it.toEntity() },
+            this.totalNegative,
+            this.totalNeutral,
+            this.totalPositive
+        )
+    }
+
+}

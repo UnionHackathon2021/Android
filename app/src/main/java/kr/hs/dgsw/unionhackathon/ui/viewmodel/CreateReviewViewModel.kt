@@ -9,34 +9,36 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kr.hs.dgsw.unionhackathon.network.repository.ClovaRepository
-import kr.hs.dgsw.unionhackathon.network.repository.ReviewRepository
-import kr.hs.dgsw.unionhackathon.network.responses.mapper.toEntity
 import kr.hs.dgsw.unionhackathon.network.responses.responseObj.dto.request.VoiceRequest
-import kr.hs.dgsw.unionhackathon.network.responses.responseObj.entity.ReviewList
 import okhttp3.ResponseBody
 import javax.inject.Inject
 
 @HiltViewModel
-class ReviewViewModel @Inject constructor(
-    private val reviewRepository: ReviewRepository
+class CreateReviewViewModel @Inject constructor(
+    private val clovaRepository: ClovaRepository
 ) : ViewModel() {
+
     private val compositeDisposable = CompositeDisposable()
 
-    private val _isSuccess = MutableLiveData<ReviewList>()
-    val isSuccess: LiveData<ReviewList> = _isSuccess
+    private val _isSuccess = MutableLiveData<ResponseBody>()
+    val isSuccess: LiveData<ResponseBody> = _isSuccess
 
     private val _isFailure = MutableLiveData<String>()
     val isFailure: LiveData<String> = _isFailure
 
-    fun getReviews() {
+    val content = MutableLiveData<String>()
+
+    fun postVoice() {
+        val voiceRequest = VoiceRequest("nhajun", content.value!!)
+
         compositeDisposable.add(
-            reviewRepository.getReviews()
+            clovaRepository.postVoice(voiceRequest)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    _isSuccess.postValue(it.toEntity())
+                    _isSuccess.postValue(it)
                 }, {
-                    Log.e("getReviews", it.message.toString())
+                    Log.e("postVoice", it.message.toString())
                     _isFailure.postValue(it.message)
                 })
         )
