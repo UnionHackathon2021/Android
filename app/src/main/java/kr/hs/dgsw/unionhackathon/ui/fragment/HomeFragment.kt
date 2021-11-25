@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
 
     private fun init() {
         val list = listOf(
+            FoodCafeFragment(),
             FoodKoreanFragment(),
             FoodSnackBarFragment(),
             FoodJapaneseFragment(),
@@ -39,6 +40,7 @@ class HomeFragment : Fragment() {
         )
 
         val textList = listOf(
+            "카페",
             "한식",
             "분식",
             "일식",

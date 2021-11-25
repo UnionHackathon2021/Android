@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionInflater
 import coil.load
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kr.hs.dgsw.unionhackathon.databinding.FragmentStoreInfoBinding
