@@ -8,6 +8,30 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.ReviewFragment">
 
+        <FrameLayout
+            android:id="@+id/frameLayout_toolbar_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_back_arrow"/>
+
+            <TextView
+                android:id="@+id/tv_store_name_review"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/black"
+                tools:text="가게명"/>
+
+        </FrameLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +78,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameLayout_toolbar_review"
             android:background="@drawable/ic_positive" />
 
         <TextView
@@ -122,7 +146,6 @@
             android:orientation="vertical"
             android:background="@color/grey"
             android:layout_marginTop="16dp"
-            android:paddingStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
